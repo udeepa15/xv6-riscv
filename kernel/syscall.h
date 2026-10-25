@@ -21,3 +21,9 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_sync   22
+#define SYS_mysyscall 23
+#define SYS_syscount 24
+#define SYS_getkernelstartaddr  25
+#define SYS_getkernelendaddr    26
+#define SYS_getkernelvariaddr   27
+#define SYS_getsystemcalladdr   28

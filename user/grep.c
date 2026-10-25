@@ -59,6 +59,7 @@ main(int argc, char *argv[])
     grep(pattern, fd);
     close(fd);
   }
+  fprintf(2, "Syscalls: %d\n", syscount());
   exit(0);
 }
 

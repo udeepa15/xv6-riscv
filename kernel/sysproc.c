@@ -110,3 +110,34 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+
+uint64
+sys_mysyscall(void)
+{
+  return 1000;
+}
+
+uint64 sys_syscount(void) {
+  return myproc()->syscall_count;
+}
+
+uint64 sys_getkernelstartaddr(void) {
+  return KERNBASE;
+}
+
+uint64 sys_getkernelendaddr(void) {
+  return PHYSTOP;
+}
+
+uint64 sys_getkernelvariaddr(void) {
+  int kernel_var = 42; 
+  return (uint64)&kernel_var;
+}
+
+
+extern uint64 sys_fork(void); 
+
+uint64 sys_getsystemcalladdr(void) {
+  return (uint64)sys_fork;
+}

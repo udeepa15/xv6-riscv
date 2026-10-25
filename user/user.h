@@ -25,6 +25,8 @@ char *sys_sbrk(int, int);
 int pause(int);
 int uptime(void);
 int sync(void);
+int mysyscall(void);
+int syscount(void);
 
 // ulib.c
 int stat(const char *, struct stat *);
@@ -48,3 +50,8 @@ void printf(const char *, ...) __attribute__((format(printf, 1, 2)));
 // umalloc.c
 void *malloc(uint);
 void free(void *);
+
+uint64 getkernelstartaddr(void);
+uint64 getkernelendaddr(void);
+uint64 getkernelvariaddr(void);
+uint64 getsystemcalladdr(void);

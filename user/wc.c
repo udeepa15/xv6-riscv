@@ -51,5 +51,6 @@ main(int argc, char *argv[])
     wc(fd, argv[i]);
     close(fd);
   }
+  fprintf(2, "Syscalls: %d\n", syscount());
   exit(0);
 }

@@ -103,7 +103,12 @@ extern uint64 sys_link(void);
 extern uint64 sys_mkdir(void);
 extern uint64 sys_close(void);
 extern uint64 sys_sync(void);
-
+extern uint64 sys_mysyscall(void);
+extern uint64 sys_syscount(void);
+extern uint64 sys_getkernelstartaddr(void);
+extern uint64 sys_getkernelendaddr(void);
+extern uint64 sys_getkernelvariaddr(void);
+extern uint64 sys_getsystemcalladdr(void);
 // An array mapping syscall numbers from syscall.h
 // to the function that handles the system call.
 static uint64 (*syscalls[])(void) = {
@@ -130,6 +135,12 @@ static uint64 (*syscalls[])(void) = {
   [SYS_mkdir]   = sys_mkdir,
   [SYS_close]   = sys_close,
   [SYS_sync]    = sys_sync,
+  [SYS_mysyscall] = sys_mysyscall,
+  [SYS_syscount]  = sys_syscount,
+  [SYS_getkernelstartaddr]  sys_getkernelstartaddr,
+  [SYS_getkernelendaddr]    sys_getkernelendaddr,
+  [SYS_getkernelvariaddr]   sys_getkernelvariaddr,
+  [SYS_getsystemcalladdr]   sys_getsystemcalladdr,
   // clang-format on
 };
 
@@ -143,6 +154,8 @@ syscall(void)
   if (num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     // Use num to lookup the system call function for num, call it,
     // and store its return value in p->trapframe->a0
+    p->syscall_count += 1;
+
     p->trapframe->a0 = syscalls[num]();
   } else {
     printk("%d %s: unknown sys call %d\n", p->pid, p->name, num);
