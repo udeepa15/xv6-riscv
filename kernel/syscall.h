@@ -27,3 +27,5 @@
 #define SYS_getkernelendaddr    26
 #define SYS_getkernelvariaddr   27
 #define SYS_getsystemcalladdr   28
+#define SYS_setpriority 29
+#define SYS_sleep 30

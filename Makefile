@@ -152,6 +152,7 @@ UPROGS=\
 	$U/_sync\
 	$U/_myprog\
 	$U/_hack\
+	$U/_testpri\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

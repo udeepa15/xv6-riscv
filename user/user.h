@@ -27,6 +27,8 @@ int uptime(void);
 int sync(void);
 int mysyscall(void);
 int syscount(void);
+int sleep(int);
+int setpriority(int priority);
 
 // ulib.c
 int stat(const char *, struct stat *);

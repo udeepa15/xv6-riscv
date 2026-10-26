@@ -124,6 +124,7 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
+  p->priority = 1;
 
   // Initialize the system call counter for this new process
   p->syscall_count = 0;
@@ -447,13 +448,21 @@ scheduler(void)
     int found = 0;
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
+      //modified
+      if(p->priority == 2) {
+      release(&p->lock);
+      continue;
+      }
+      //modified
+
+
       if (p->state == RUNNABLE) {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
         // before jumping back to us.
         p->state = RUNNING;
         c->proc = p;
-        swtch(&c->context, &p->context);
+        swtch(&c->context, &p->context); 
 
         // Don't re-enable interrupts on release.
         mycpu()->intena = 0;

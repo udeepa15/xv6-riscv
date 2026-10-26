@@ -141,3 +141,35 @@ extern uint64 sys_fork(void);
 uint64 sys_getsystemcalladdr(void) {
   return (uint64)sys_fork;
 }
+
+uint64 sys_setpriority(void) {
+  int pr;
+  argint(0, &pr);
+  myproc()->priority = pr;
+  return pr;
+}
+
+uint64
+sys_sleep(void)
+{
+  int n;
+  uint ticks0;
+
+  argint(0, &n);
+  if (n < 0)
+    n = 0;
+  acquire(&tickslock);
+  ticks0 = ticks;
+  while (ticks - ticks0 < n) {
+    if (killed(myproc())) {
+      release(&tickslock);
+      return -1;
+    }
+    sleep_prepare(&ticks);
+    release(&tickslock);
+    sleep();
+    acquire(&tickslock);
+  }
+  release(&tickslock);
+  return 0;
+}
