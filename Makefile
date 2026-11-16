@@ -153,6 +153,7 @@ UPROGS=\
 	$U/_myprog\
 	$U/_hack\
 	$U/_testpri\
+	$U/_inodesize\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

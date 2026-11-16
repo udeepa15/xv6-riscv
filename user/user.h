@@ -29,6 +29,7 @@ int mysyscall(void);
 int syscount(void);
 int sleep(int);
 int setpriority(int priority);
+int getinodesize(char*);
 
 // ulib.c
 int stat(const char *, struct stat *);

@@ -528,3 +528,30 @@ sys_pipe(void)
   }
   return 0;
 }
+
+uint64
+sys_getinodesize(void)
+{
+  char path[MAXPATH];
+  struct inode *ip;
+  int size;
+
+  if(argstr(0, path, MAXPATH) < 0)
+    return -1;
+
+  begin_op();
+  if((ip = namei(path)) == 0){   
+    end_op();
+    return -1;
+  }
+  ilock(ip);
+  if(ip->type != T_DIR){         
+    iunlockput(ip);
+    end_op();
+    return -1;
+  }
+  size = ip->size;               
+  iunlockput(ip);
+  end_op();
+  return size;
+}

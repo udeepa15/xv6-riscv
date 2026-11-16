@@ -51,3 +51,4 @@ entry("getkernelendaddr");
 entry("getkernelvariaddr");
 entry("getsystemcalladdr");
 entry("setpriority");
+entry("getinodesize");

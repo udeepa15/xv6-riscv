@@ -29,3 +29,4 @@
 #define SYS_getsystemcalladdr   28
 #define SYS_setpriority 29
 #define SYS_sleep 30
+#define SYS_getinodesize 31
