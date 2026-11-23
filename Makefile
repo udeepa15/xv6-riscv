@@ -154,6 +154,7 @@ UPROGS=\
 	$U/_hack\
 	$U/_testpri\
 	$U/_inodesize\
+	$U/_bgservice\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

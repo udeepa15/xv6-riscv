@@ -10,3 +10,4 @@ _*
 /user/usys.S
 .gdbinit
 TAGS
+xv6-data-collection.sh

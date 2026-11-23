@@ -10,6 +10,7 @@
 #include "kernel/fcntl.h"
 
 char *argv[] = {"sh", 0};
+char *bg_argv[] = { "bgservice", 0 };
 
 int
 main(void)
@@ -22,6 +23,17 @@ main(void)
   }
   dup(0); // stdout
   dup(0); // stderr
+
+  int bg_pid = fork();
+  if(bg_pid < 0){
+    printf("init: fork failed for bgservice\n");
+    exit(1);
+  }
+  if(bg_pid == 0){
+    exec("bgservice", bg_argv);
+    printf("init: exec bgservice failed\n");
+    exit(1);
+  }
 
   for (;;) {
     printf("init: starting sh\n");
